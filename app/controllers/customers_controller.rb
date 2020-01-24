@@ -17,6 +17,7 @@ class CustomersController < ApplicationController
     end 
   
     def login 
+        
         @customer = Customer.new
     end 
     def new  
@@ -41,7 +42,8 @@ class CustomersController < ApplicationController
         end  
         
         redirect_to @switch ? customer_path(@customer) : {action: :login}
-    end
+    end 
+
     def create 
         @customer = Customer.create(customer_params) 
         session[:customer_id] = @customer.id
@@ -75,6 +77,7 @@ class CustomersController < ApplicationController
     def require_login
         return head(:forbidden) unless session.include? :customer_id
     end 
+    
 private 
 
     def customer_params 
