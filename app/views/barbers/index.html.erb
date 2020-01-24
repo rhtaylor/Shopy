@@ -1,0 +1,14 @@
+<div class="barber" %>
+<% @barbers.each do |barber| %>
+
+<h1 class='red'><%= barber.name %><h1> 
+<% barber.customers.each do |customer| %>
+<h2 class='white'>Takes care of: <h2>
+<h2 class='blue'><%= customer.name %></h2> 
+<% end %> 
+<% barber.haircuts.each do |cut| %>
+
+<h2 class='white'>In styles of: <b><%= cut.style %></b></h2> 
+<% end %>
+<% end %> 
+</div>

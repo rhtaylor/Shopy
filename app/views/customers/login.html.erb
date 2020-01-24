@@ -1,0 +1,8 @@
+<% if session[:errors] %>
+<div class='first'>
+<%= session[:errors] if session[:errors] %>
+
+<%= link_to 'Sign up', new_customer_path if session[:errors] %>
+</div> 
+<%end %>
+<%= render 'partial/signin' %>

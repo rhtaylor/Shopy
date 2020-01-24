@@ -1,0 +1,15 @@
+<% if flash[:full_errors] %>
+<ul>
+<% flash[:full_errors].each do |k,v| %>
+    <li><h2 class='red'><%=k %></h2></li> 
+    <% v.first.each do |x,y| %>
+        <p>cannot be <%= y %></p>
+        
+        <%end%>
+    <% end %> 
+</ul>
+    <% end %>
+<% if flash[:error] %> 
+    <div class="first"><h3 class='red'><%= flash[:error] %></h3></div> 
+    <% end %>
+<%= render 'partial/customer' %>
