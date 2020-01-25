@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController  
     helper_method :current_user, :logged_in? 
     before_action :require_login
-    skip_before_action :require_login, only: [:login, :new, :login_user]
+    skip_before_action :require_login, only: [:login, :new, :login_user, :create, :fbook]
     
     def require_login
         return head(:forbidden) unless session.include? :customer_id
@@ -15,14 +15,26 @@ class CustomersController < ApplicationController
     def logged_in?
        current_user != nil
     end 
-  
+   
+    def fbook  
+        @customer = Customer.find_or_create_by(uid: auth['uid']) do |u|
+      u.name = auth['info']['name']
+      u.email = auth['info']['email']
+      
+        end  
+        
+         session[:customer_id] = @customer.id
+        
+    render 'customers/home'
+
+    end
     def login 
         
         @customer = Customer.new
     end 
     def new  
         @customer = Customer.new
-        session[:customer_id] = @customer.id
+        
     end 
     def login_user
          
@@ -44,12 +56,15 @@ class CustomersController < ApplicationController
         redirect_to @switch ? customer_path(@customer) : {action: :login}
     end 
 
-    def create 
+    def create  
+        
         @customer = Customer.create(customer_params) 
+        
+        
         session[:customer_id] = @customer.id
         if @customer.valid?
             
-            session[:id] = @customer.id
+            
             redirect_to customer_path(@customer) 
         else 
             
@@ -64,7 +79,7 @@ class CustomersController < ApplicationController
     def show 
        session[:page] = 'profile' 
         @customer = Customer.find(params[:id])  
-        session[:id] = @customer.id 
+        session[:customer_id] = @customer.id 
         @session = session
         
     end 
@@ -77,9 +92,12 @@ class CustomersController < ApplicationController
     def require_login
         return head(:forbidden) unless session.include? :customer_id
     end 
-    
+
 private 
 
+    def auth
+        request.env['omniauth.auth']
+    end
     def customer_params 
         params.require('customer').permit('name', 'phone_number', 'email', 'password', 'password_confirmation')
     end
