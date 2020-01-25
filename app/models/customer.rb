@@ -1,4 +1,7 @@
 class Customer < ApplicationRecord  
+    
+    attr_accessor :uid
+
     has_secure_password
     has_many :appointments 
     has_many :barbers, through: :appointments 

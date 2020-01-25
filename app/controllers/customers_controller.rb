@@ -16,17 +16,19 @@ class CustomersController < ApplicationController
        current_user != nil
     end 
    
-    def fbook  
-        @customer = Customer.find_or_create_by(uid: auth['uid']) do |u|
-      u.name = auth['info']['name']
-      u.email = auth['info']['email']
-      
-        end  
-        
-         session[:customer_id] = @customer.id
-        
-    render 'customers/home'
-
+    def fbook
+        @auth_name = auth['info']['name']
+        if @auth_name 
+            @flag = true 
+                session[:message] = 'Welcome FACEBOOK USER!'
+                @customer = Customer.find_by(name: @auth_name) 
+                session[:customer_id] = @customer.id  
+        else  
+            @flag = false
+            session[:errors] = "User does not exist on Facebook and or Shopy" 
+            session[:message] = "Login a different way!"
+        end
+        redirect_to @flag ? customer_path(@customer) : login_user_path
     end
     def login 
         
