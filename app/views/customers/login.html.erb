@@ -2,7 +2,7 @@
 <div class='first'>
 <%= session[:errors] if session[:errors] %>
 
-<%= link_to 'Sign up', new_customer_path if session[:errors] %>
+retry or <%= link_to 'Sign up', new_customer_path if session[:errors] %>
 </div> 
 <%end %>
 <%= render 'partial/signin' %>

@@ -17,7 +17,8 @@ class CustomersController < ApplicationController
     end 
    
     def fbook
-        @auth_name = auth['info']['name']
+        @auth_name = auth['info']['name'] 
+        #add uid step here
         if @auth_name 
             @flag = true 
                 session[:message] = 'Welcome FACEBOOK USER!'
@@ -43,7 +44,7 @@ class CustomersController < ApplicationController
         password = params[:customer][:password]
         name = params[:customer][:name]
         @customer = Customer.find_by(name: name)
-        @customer.try(:authenticate, password) 
+         
         
         if  @customer.try(:authenticate, password)  
         
@@ -51,11 +52,11 @@ class CustomersController < ApplicationController
             @switch = true
         else
             @switch = false 
-            session[:errors] = 'Password incorrect.' 
+            @customer.nil? ? session[:errors] = "Username not found" : session[:errors] = 'Password incorrect.' 
             session[:page] = 'login'
         end  
         
-        redirect_to @switch ? customer_path(@customer) : {action: :login}
+        redirect_to @switch ? customer_path(@customer) : @customer.nil? ? {action: :new} : {action: :login}
     end 
 
     def create  
