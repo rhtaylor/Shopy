@@ -1,7 +1,8 @@
 <div class="barber" %>
 <% @barbers.each do |barber| %>
 
-<h1 class='red'><%= barber.name %><h1> 
+<h1 class='red'>
+<%= link_to barber.name, barber_path(barber) %></h1>
 <% barber.customers.each do |customer| %>
 <h2 class='white'>Takes care of: <h2>
 <h2 class='blue'><%= customer.name %></h2> 
@@ -11,4 +12,4 @@
 <h2 class='white'>In styles of: <b><%= cut.style %></b></h2> 
 <% end %>
 <% end %> 
-</div>
+</div> 

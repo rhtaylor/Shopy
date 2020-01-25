@@ -10,10 +10,14 @@ class HaircutsController < ApplicationController
   def logged_in?
     current_user != nil
   end 
-
-    def new 
-        if params.keys.include?('customer_id')
-            session[:id] = params['customer_id'] 
+    def index 
+        @ordered = Haircut.schedule
+    end
+    def new  
+        if session[:customer_id] 
+            id = session[:customer_id] 
+            @customer = Customer.find(id) 
+        
         end
       
     end 
@@ -31,7 +35,7 @@ class HaircutsController < ApplicationController
         if @haircut.valid?
             session[:id] = params[:haircut][:customer_id]
             redirect_to haircut_path(@haircut) 
-            binding.pry
+            
         else 
             binding.pry
         end
@@ -41,7 +45,8 @@ class HaircutsController < ApplicationController
     def show 
         session[:page] = 'scheduled'
         @haircut = Haircut.find(params[:id]) 
-        @barber = Barber.find(@haircut.barber_id)
+        @barber = Barber.find(@haircut.barber_id) 
+        
     end
     private 
 

@@ -9,5 +9,6 @@ class Customer < ApplicationRecord
     has_many :barbers, through: :haircuts 
     
      
-    validates :name, :email, :phone_number, presence: true, uniqueness: true
+    validates :name, :email, :phone_number, presence: true, uniqueness: true 
+    accepts_nested_attributes_for :barbers, :haircuts, :barbers
 end

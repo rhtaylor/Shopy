@@ -1,6 +1,7 @@
-<% if logged_in? %> 
-<% @customer = current_user %>
+<% if logged_in? %>  
+
+<% @customer %>
 <%= render partial: 'partial/cut', locals: { haircut: @customer.haircuts.build } %> 
 <% else %>
 <%= render partial: 'partial/cut', locals: {haircut: @haircut = Haircut.new} %> 
-<% end %>
+<% end %> 

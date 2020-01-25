@@ -8,4 +8,11 @@ class Haircut < ApplicationRecord
 
     accepts_nested_attributes_for :customer, :barber
 
+
+    def self.schedule 
+        Haircut.order(:created_at)
+    end
+ 
+   
+
 end

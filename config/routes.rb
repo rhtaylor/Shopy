@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'logout', to: 'application#logout' 
   post 'login_user', to: 'customers#login_user' 
   get '/auth/facebook/callback' => 'customers#fbook'
+  get 'haircuts/schedule', to: 'haircuts#index' 
   resources :haircuts
   resources :appointments
   resources :customers do 
