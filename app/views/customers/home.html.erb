@@ -3,7 +3,7 @@
   <h1><%= @customer.name %></h1>
   <h2>Email: <%= @customer.email %></h2>
   <h2>Facebook UID: <%= @customer.uid %></h2>
-  
+  <% binding.pry %>
 <% else %>
   <%= link_to('Log in with Facebook!', '/auth/facebook') %>
 <% end %>
