@@ -20,16 +20,24 @@ class CustomersController < ApplicationController
         @auth_name = auth['info']['name'] 
         #add uid step here
         if @auth_name 
-            @flag = true 
-                session[:message] = 'Welcome FACEBOOK USER!'
-                @customer = Customer.find_by(name: @auth_name) 
-                session[:customer_id] = @customer.id  
+            @on_Fbook = true 
+                
+                @customer = Customer.find_by(name: @auth_name)  
+                
+                if @customer  
+                   session[:message] = 'Welcome FACEBOOK USER!' 
+                   session[:customer_id] = @customer.try(:id)  
+                else 
+                    @in_db = false
+                    session[:errors] = "User is not registered under Shopy"  
+                    session[:errors] = "Login a different way or Regester with us!"
+                end
         else  
             @flag = false
             session[:errors] = "User does not exist on Facebook and or Shopy" 
             session[:message] = "Login a different way!"
         end
-        redirect_to @flag ? customer_path(@customer) : login_user_path
+        redirect_to @in_db ? customer_path(@customer) : login_path
     end
     def login 
         
@@ -47,15 +55,15 @@ class CustomersController < ApplicationController
          
         
         if  @customer.try(:authenticate, password)  
-        
+            
             session[:customer_id] = @customer.id
             @switch = true
         else
             @switch = false 
-            @customer.nil? ? session[:errors] = "Username not found" : session[:errors] = 'Password incorrect.' 
+            @customer.nil? ? session[:errors] = "Username not found." : session[:errors] = 'Password incorrect.' 
             session[:page] = 'login'
         end  
-        
+   
         redirect_to @switch ? customer_path(@customer) : @customer.nil? ? {action: :new} : {action: :login}
     end 
 
