@@ -106,7 +106,10 @@ class CustomersController < ApplicationController
     def require_login
         return head(:forbidden) unless session.include? :customer_id
     end 
-
+ 
+    def destroy 
+        binding.pry
+    end
 private 
 
     def auth
