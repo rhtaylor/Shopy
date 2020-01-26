@@ -1,15 +1,18 @@
+<h1>Shop of Barbers</h1>
 <div class="barber" %>
+<ol>
 <% @barbers.each do |barber| %>
+<li><%= link_to barber.name, barber_path(barber) %></li>
+    <ul>
+<% barber.customers.all.uniq.each do |customer| %>
+<h4>Takes care of: </h4>
 
-<h1 class='red'>
-<%= link_to barber.name, barber_path(barber) %></h1>
-<% barber.customers.each do |customer| %>
-<h2 class='white'>Takes care of: <h2>
-<h2 class='blue'><%= customer.name %></h2> 
-<% end %> 
-<% barber.haircuts.each do |cut| %>
-
-<h2 class='white'>In styles of: <b><%= cut.style %></b></h2> 
+    <li><%= customer.name %></li>
+    <% end %>
+    </ul> 
+<% style = barber.haircuts.all.map{|cut| cut.style } %>
+<% style.uniq.each do |type| %>
+<h2 class='white'>In styles of: <b><%= type %></b></h2> 
 <% end %>
 <% end %> 
 </div> 
