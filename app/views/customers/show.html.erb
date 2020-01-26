@@ -8,9 +8,9 @@
 <li><%= style %> style</li>
 <% end %>
 </ul> 
-<% if @customer.haircuts.count == 0 %>
+
 <p><%= link_to 'schedule a haircut', new_customer_haircut_path(@customer) %></p>
-<% end %>
+
 <li><%= @customer.barbers.count %> Barbers cut your hair.<li/> 
 <ol>
 <%  @customer.barbers.all.uniq.each do |x| %>
