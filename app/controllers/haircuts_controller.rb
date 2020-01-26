@@ -30,7 +30,9 @@ class HaircutsController < ApplicationController
   end 
     def index 
         
-        session[:id] = session[:customer_id]
+        session[:id] = session[:customer_id] 
+        @session = session 
+        
         @selected = Haircut.schedule
     end
     def new   
@@ -67,6 +69,7 @@ class HaircutsController < ApplicationController
 
     def show 
         
+        @customer = current_user 
         session[:customer_id] = @customer.id 
         session[:page] = 'scheduled'
         @haircut = Haircut.find(params[:id]) 

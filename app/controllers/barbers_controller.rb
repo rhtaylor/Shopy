@@ -12,8 +12,11 @@ class BarbersController < ApplicationController
         session[:page] = 'home'
     end
 
-    def index
-        session[:page] = 'barbers'
+    def index 
+        
+        session[:page] = 'barbers' 
+        @session = session 
+
         session[:customer_id] = session[:id]
         
         @barbers = Barber.all
