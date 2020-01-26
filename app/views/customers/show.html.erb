@@ -1,11 +1,21 @@
 <h1 class='first'><%= session[:message] if session[:message] %></h1>
 <div class='customer'>
-<h1 class='red'><b><%= @customer.name %></b></h1> 
+<h1 class='red'><b>Hi <%= @customer.name %>!</b></h1> 
+<ul><li><%= @customer.haircuts.count  %> cuts with us.</li>
+<ol>
+<% style_collection = @customer.haircuts.map{|cut| cut.style } %>
+<% style_collection.uniq.each do |style| %>
+<li><%= style %> style</li>
+<% end %>
+</ul>
+<li><%= @customer.barbers.count %> Barbers cut your hair.<li/> 
+<ol>
+<%  @customer.barbers.all.uniq.each do |x| %>
 
-<h3 class='white'><%= @customer.haircuts.count %></h3>  
-
-<h3 class='blue'><%= @customer.barbers.count %></h3> 
-
+<li><%= link_to x.name, barber_path(x) %></li> 
+    <% end %> 
+</ol>
+</ul>
 </div>
 
 
