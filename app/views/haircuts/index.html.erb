@@ -1,5 +1,5 @@
 
-<% @selected.each do |haircut| %>
+<% @selected.uniq.each do |haircut| %>
 <h4><%= haircut.customer.name %> has a cut with <%= haircut.barber.name %> <%= haircut.date.to_time.strftime("%A, %b %e, at %l:%M %p")  %></h4>
 
 <% end %>  

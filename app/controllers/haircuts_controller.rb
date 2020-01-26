@@ -3,8 +3,9 @@ require 'time'
 class HaircutsController < ApplicationController 
      helper_method :current_user, :logged_in?
 
-  def current_user
-    @customer ||= Customer.find_by(id: session[:id])
+  def current_user 
+    
+    @customer ||= Customer.find_by(id: session[:customer_id])
   end
 
   def filter 
@@ -33,6 +34,7 @@ class HaircutsController < ApplicationController
         @selected = Haircut.schedule
     end
     def new   
+        
         session[:page] = 'new haircut' 
         session[:id] = session[:customer_id]
         if session[:customer_id] 
@@ -64,6 +66,8 @@ class HaircutsController < ApplicationController
     end 
 
     def show 
+        
+        session[:customer_id] = @customer.id 
         session[:page] = 'scheduled'
         @haircut = Haircut.find(params[:id]) 
         @barber = Barber.find(@haircut.barber_id) 

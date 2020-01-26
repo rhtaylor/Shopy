@@ -87,10 +87,12 @@ class CustomersController < ApplicationController
 
     end  
 
-    def show 
+    def show  
+        
         session[:page] = 'profile' 
         @customer = Customer.find(params[:id])  
-        session[:customer_id] = @customer.id 
+        session[:customer_id] = @customer.id  
+       
         @session = session
         
     end 
