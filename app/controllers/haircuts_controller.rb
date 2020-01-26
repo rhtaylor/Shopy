@@ -7,12 +7,17 @@ class HaircutsController < ApplicationController
     @customer ||= Customer.find_by(id: session[:id])
   end
 
-  def filter
-        
-        if params.keys.include?("id") && params[:customer].empty?
+  def filter 
+     
+        if  params.keys.include?("id") && !(params[:customer].empty?) 
+            @one = Haircut.mycuts(current_user)  
+            @two = Haircut.where(customer_id: params[:customer])
+            @selected = @one.to_a + @two 
+
+        elsif params.keys.include?("id") && params[:customer].empty?
             @selected = Haircut.mycuts(current_user)  
             
-        else 
+        elsif 
             @id = params[:customer] 
             @customer = Customer.find(@id)
             @selected = Haircut.mycuts(@customer)
