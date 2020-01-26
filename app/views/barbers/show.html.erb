@@ -7,4 +7,6 @@
 <% @barber.customers.each do |customer| %>
 <li class='fancy'><%= customer.name %></li> 
 <% end %>
-</ul>
+</ul> 
+
+<%= render partial: 'partial/cut', locals: {haircut: current_user.haircuts.new } %> 

@@ -9,12 +9,15 @@
 <br><p>
 <%= f.text_field :date %></p>
 <br> 
-<%= f.label :barber %>
-<%= f.text_field :barber, list: "categories_autocomplete" %>
-  <datalist id="categories_autocomplete">
+<%= f.label :barber %> 
+
+<%= f.text_field :barber, list: "categories_autocomplete"  %>
+  <datalist id="categories_autocomplete"> 
+    
     <% Barber.all.each do |barber| %>
       <option value="<%= barber.name %>" name="<%= barber.id %>">
-    <% end %>
+    <% end %> 
+    
   </datalist> 
   <br>
   <%= f.label :customer %> 

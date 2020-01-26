@@ -3,9 +3,11 @@ class BarbersController < ApplicationController
     def require_login
         return head(:forbidden) unless session.include? :customer_id
     end 
-    
+    def logged_in? 
+         current_user != nil
+    end
     def current_user
-        @customer ||= Customer.find_by(id: session[:id])
+        @customer ||= Customer.find_by(id: session[:customer_id])
     end
     
     def shop 
