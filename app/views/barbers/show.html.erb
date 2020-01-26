@@ -1,1 +1,10 @@
-<%= @barber.name %>
+
+<h1 class='fancy'><%= @barber.name %> <%= @barber.created_at.to_time.strftime("barber since %A, %b %e") %></h1> 
+
+<h4 class="first">Cutting <%= @barber.customers.count %> customer's hair.</h4>  
+<h4 class="first"><%= @barber.haircuts.count %> Finished Cuts</h4>
+<ul>
+<% @barber.customers.each do |customer| %>
+<li class='fancy'><%= customer.name %></li> 
+<% end %>
+</ul>

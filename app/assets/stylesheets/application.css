@@ -33,4 +33,15 @@
 } 
 .customer{
     background-color: rgb(106, 90, 212);
+} 
+ 
+.fancy{ 
+     box-shadow: 2px 2px red;
+    background-color: rgb(192, 127, 127); 
+    color: ghostwhite 
+    
+} 
+.nav{
+    box-shadow: gold; 
+    background-color: rgb(189, 245, 255);
 }

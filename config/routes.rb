@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'login', to: 'customers#login'
   get 'logout', to: 'application#logout' 
   post 'login_user', to: 'customers#login_user' 
+  post '/filter', to: 'haircuts#filter'
   get '/auth/facebook/callback' => 'customers#fbook'
   get 'haircuts/schedule', to: 'haircuts#index' 
   resources :haircuts

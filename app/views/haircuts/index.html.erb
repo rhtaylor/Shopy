@@ -1,5 +1,17 @@
 
-<% @ordered.each do |haircut| %>
+<% @selected.each do |haircut| %>
 <h4><%= haircut.customer.name %> has a cut with <%= haircut.barber.name %> <%= haircut.date.to_time.strftime("%A, %b %e, at %l:%M %p")  %></h4>
 
-<% end %>
+<% end %>  
+
+   <%= form_tag("/filter", method: 'POST') do %>
+    <%= select_tag "customer", options_from_collection_for_select(Customer.all, "id", "name"), include_blank: true  %>
+    <p>my cuts <%= check_box_tag 'id', value=current_user.id, checked=true %></p>
+    <%= submit_tag "Select" %> 
+
+    <% end %> 
+    <br> 
+        
+        
+        
+        

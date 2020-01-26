@@ -7,13 +7,29 @@ class HaircutsController < ApplicationController
     @customer ||= Customer.find_by(id: session[:id])
   end
 
+  def filter
+        
+        if params.keys.include?("id") && params[:customer].empty?
+            @selected = Haircut.mycuts(current_user)  
+            
+        else 
+            @id = params[:customer] 
+            @customer = Customer.find(@id)
+            @selected = Haircut.mycuts(@customer)
+        end
+     render :index
+  end 
   def logged_in?
     current_user != nil
   end 
     def index 
-        @ordered = Haircut.schedule
+        
+        session[:id] = session[:customer_id]
+        @selected = Haircut.schedule
     end
-    def new  
+    def new   
+        session[:page] = 'new haircut' 
+        session[:id] = session[:customer_id]
         if session[:customer_id] 
             id = session[:customer_id] 
             @customer = Customer.find(id) 

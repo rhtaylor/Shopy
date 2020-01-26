@@ -12,12 +12,16 @@ class BarbersController < ApplicationController
         session[:page] = 'home'
     end
 
-    def index 
+    def index
         session[:page] = 'barbers'
+        session[:customer_id] = session[:id]
+        
         @barbers = Barber.all
     end 
-    def show 
-        barber_id = session[:id] 
+    def show  
+        
+        barber_id = params[:id] 
+
         @barber = Barber.find(barber_id)
     end
 end

@@ -10,9 +10,13 @@ class Haircut < ApplicationRecord
 
 
     def self.schedule 
-        Haircut.order(:created_at)
+        self.order(:date, :DESC)
     end
  
+    def self.mycuts(val) 
+        
+        self.where(customer_id: val.id)
+    end
    
 
 end
