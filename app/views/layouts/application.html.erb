@@ -9,7 +9,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head> 
 
-  <%= render 'partial/nav' unless session[:page] == 'home' %>
+  <%= render 'partial/nav' unless session[:page] == 'home' || session[:page] == "new" %>
   <body>
     <%= yield %>
   </body>

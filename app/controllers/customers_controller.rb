@@ -44,6 +44,7 @@ class CustomersController < ApplicationController
         @customer = Customer.new
     end 
     def new  
+        session[:page] = 'new'
         @customer = Customer.new
         
     end 

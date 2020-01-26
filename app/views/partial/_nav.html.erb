@@ -1,4 +1,4 @@
 <% if session[:customer_id] || current_user.nil?  %>
 
-<nav class="nav"><%= link_to 'schedule', haircuts_schedule_path unless current_user.nil? %> | <%= link_to 'logout', logout_path%> || <%= link_to 'barbers', barbers_path %> | <%= link_to 'profile', customer_path(current_user) unless current_user.nil? %> | <%= link_to 'schedule a haircut', new_haircut_path %></nav>
+<nav class="nav"><%= link_to 'schedule', haircuts_schedule_path %> | <%= link_to 'logout', logout_path %> | <%= link_to 'barbers', barbers_path %> | <%= link_to 'profile', customer_path(current_user) unless current_user.nil? %> | <%= link_to 'schedule a haircut', new_haircut_path %></nav>
 <% end %>                                          
