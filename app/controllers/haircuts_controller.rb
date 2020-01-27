@@ -47,22 +47,26 @@ class HaircutsController < ApplicationController
       
     end 
 
-    def create  
-        date = params[:haircut][:date] 
-        ad = date.to_time.strftime("%A, %b %e, at %l:%M %p")
-        savable_date = date.to_time
+    def create 
+    
         
-        date
+        date_time = params[:datetime].values 
+        
+        dat = date_time[0..2].join("-") 
+        date = dat += " "
+        time = date_time[3, 4].join(":") 
+        date_ready = date += time 
         barber = Barber.find_by(name: params[:haircut][:barber]) 
         style = params[:haircut][:style]
         customer_id = params[:haircut][:customer_id]
-        @haircut = Haircut.create(style: style, date: savable_date , barber_id: barber.id, customer_id: customer_id) 
+        @haircut = Haircut.create(style: style, date: date_ready , barber_id: barber.id, customer_id: customer_id) 
         if @haircut.valid?
             session[:id] = params[:haircut][:customer_id]
             redirect_to haircut_path(@haircut) 
             
         else 
-            binding.pry
+            binding.pry 
+            #add error handling here
         end
 
     end 

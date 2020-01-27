@@ -5,9 +5,11 @@
 <%= f.label :style  %>
 <%= f.text_field :style %>
 <br> 
-<%= f.label :date %> <%= f.label 'format (yyyy-mm-dd hr:mm)' %>
-<br><p>
-<%= f.text_field :date %></p>
+<%= f.label :date %> 
+<br>
+
+<%= datetime_select( 'datetime' ,:date, {:minute_step => 15} )  %>
+
 <br> 
 <%= f.label :barber %> 
 
