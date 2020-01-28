@@ -10,6 +10,7 @@
   </head> 
 
   <%= render 'partial/nav' unless session[:page] == 'home' || session[:page] == "new" %>
+  
   <body>
     <%= yield %>
   </body>

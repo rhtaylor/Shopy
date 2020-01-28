@@ -43,14 +43,15 @@ class CustomersController < ApplicationController
     def login_user
          
         password = params[:customer][:password]
-        name = params[:customer][:name]
-        @customer = Customer.find_by(name: params[:customer][:slug])
+        email = params[:customer][:email] 
+        
+        @customer = Customer.find_by(email: email)
          
         
-        if  @customer.try(:authenticate, password)  
-            binding.pry
+        if      @customer.try(:authenticate, password)  
+            
             session[:slug] = @customer.slug
-
+            session[:customer_slug] = @customer.slug
             @switch = true
         else
             @switch = false 
@@ -84,7 +85,7 @@ class CustomersController < ApplicationController
     def show  
         
         session[:page] = 'profile' 
-        @customer = Customer.find(params[:id])  
+        @customer = Customer.find_by(slug: params[:slug])  
         session[:customer_id] = @customer.id  
        
         @session = session
@@ -96,9 +97,7 @@ class CustomersController < ApplicationController
         redirect_to root_path 
     end 
 
-    def require_login
-        return head(:forbidden) unless session.include? :customer_id
-    end 
+    
  
     def destroy 
         binding.pry
