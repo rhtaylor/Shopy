@@ -1,4 +1,5 @@
 class Haircut < ApplicationRecord  
+    
     validates :style, :barber, presence: true 
     validates_associated :barber, presence: true
     validates_associated :customer, presence: true

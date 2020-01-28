@@ -3,10 +3,7 @@ require 'time'
 class HaircutsController < ApplicationController 
      helper_method :current_user, :logged_in?
 
-  def current_user 
-    
-    @customer ||= Customer.find_by(id: session[:customer_id])
-  end
+ 
 
   def filter 
      
@@ -25,16 +22,17 @@ class HaircutsController < ApplicationController
         end
      render :index
   end 
-  def logged_in?
-    current_user != nil
-  end 
+  
     def index 
         
         session[:id] = session[:customer_id] 
         @session = session 
         
         @selected = Haircut.schedule
-    end
+    end 
+
+     
+    
     def new   
         
         session[:page] = 'new haircut' 

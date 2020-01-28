@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'haircuts/schedule', to: 'haircuts#index' 
   resources :haircuts
   resources :appointments
-  resources :customers do 
+  resources :customers, param: :slug do 
     resources :haircuts, only: [:new, :show ]
   end
   resources :barbers

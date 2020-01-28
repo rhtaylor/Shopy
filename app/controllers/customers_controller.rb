@@ -3,18 +3,10 @@ class CustomersController < ApplicationController
     before_action :require_login
     skip_before_action :require_login, only: [:login, :new, :login_user, :create, :fbook]
     
-    def require_login
-        return head(:forbidden) unless session.include? :customer_id
-    end 
-    
-    def current_user
-        @customer ||= Customer.find_by(id: session[:id])
+   
+    def find_by_slug 
+
     end
-    
-    
-    def logged_in?
-       current_user != nil
-    end 
    
     def fbook
         @auth_name = auth['info']['name'] 
@@ -52,12 +44,13 @@ class CustomersController < ApplicationController
          
         password = params[:customer][:password]
         name = params[:customer][:name]
-        @customer = Customer.find_by(name: name)
+        @customer = Customer.find_by(name: params[:customer][:slug])
          
         
         if  @customer.try(:authenticate, password)  
-            
-            session[:customer_id] = @customer.id
+            binding.pry
+            session[:slug] = @customer.slug
+
             @switch = true
         else
             @switch = false 
