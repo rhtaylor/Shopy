@@ -6,7 +6,8 @@ class BarbersController < ApplicationController
     end
 
 
-    def index 
+    def index  
+        
         session[:page] = 'barbers' 
         @session = session 
         session[:customer_id] = session[:id]

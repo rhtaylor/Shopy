@@ -7,12 +7,12 @@ class HaircutsController < ApplicationController
 
   def filter 
      
-        if  params.keys.include?("id") && !(params[:customer].empty?) 
+        if  params.keys.include?("slug") && !(params[:customer].empty?) 
             @one = Haircut.mycuts(current_user)  
-            @two = Haircut.where(customer_id: params[:customer])
+            @two = Haircut.where(customer_slug: params[:customer])
             @selected = @one.to_a + @two 
 
-        elsif params.keys.include?("id") && params[:customer].empty?
+        elsif params.keys.include?("slug") && params[:customer].empty?
             @selected = Haircut.mycuts(current_user)  
             
         elsif 
@@ -25,7 +25,7 @@ class HaircutsController < ApplicationController
   
     def index 
         
-        session[:id] = session[:customer_id] 
+        session[:slug] = session[:customer_slug] 
         @session = session 
         
         @selected = Haircut.schedule
@@ -36,10 +36,12 @@ class HaircutsController < ApplicationController
     def new   
         
         session[:page] = 'new haircut' 
-        session[:id] = session[:customer_id]
-        if session[:customer_id] 
-            id = session[:customer_id] 
-            @customer = Customer.find(id) 
+        session[:slug] = session[:customer_slug]  
+        
+        
+        if session[:customer_slug] 
+            slug = session[:customer_slug] 
+            @customer = Customer.find_by(slug: slug) 
         
         end
       
@@ -56,10 +58,11 @@ class HaircutsController < ApplicationController
         date_ready = date += time 
         barber = Barber.find_by(name: params[:haircut][:barber]) 
         style = params[:haircut][:style]
-        customer_id = params[:haircut][:customer_id]
+        customer_id = session[:customer_id] 
+        binding.pry
         @haircut = Haircut.create(style: style, date: date_ready , barber_id: barber.id, customer_id: customer_id) 
         if @haircut.valid?
-            session[:id] = params[:haircut][:customer_id]
+            session[:slug] = params[:haircut][:customer_slug]
             redirect_to haircut_path(@haircut) 
             
         else 
