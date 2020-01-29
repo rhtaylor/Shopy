@@ -66,8 +66,8 @@ class CustomersController < ApplicationController
         
         @customer = Customer.create(customer_params) 
         
-        
-        session[:customer_id] = @customer.id
+        binding.pry
+        session[:customer_slug] = @customer.slug
         if @customer.valid?
             
             
@@ -86,7 +86,7 @@ class CustomersController < ApplicationController
         
         session[:page] = 'profile' 
         @customer = Customer.find_by(slug: params[:slug])  
-        session[:customer_id] = @customer.id  
+        session[:customer_slug] = @customer.slug  
        
         @session = session
         
