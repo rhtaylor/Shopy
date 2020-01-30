@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
    
     def fbook
         @auth_name = auth['info']['name'] 
-    
+        
         if @auth_name 
             @on_Fbook = true 
                 
@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
                 @in_db = true
                 if @customer  
                    session[:message] = 'Welcome FACEBOOK USER!' 
-                   session[:customer_id] = @customer.id  
+                   session[:customer_slug] = @customer.slug  
                 else 
                     @in_db = false
                     session[:errors] = "User is not registered under Shopy"  
