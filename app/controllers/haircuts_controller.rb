@@ -58,8 +58,9 @@ class HaircutsController < ApplicationController
         date_ready = date += time 
         barber = Barber.find_by(name: params[:haircut][:barber]) 
         style = params[:haircut][:style]
-        customer_id = session[:customer_id] 
-        binding.pry
+        slug = session[:customer_slug]
+        @customer = Customer.find_by(slug: slug) 
+        customer_id = current_user.id
         @haircut = Haircut.create(style: style, date: date_ready , barber_id: barber.id, customer_id: customer_id) 
         if @haircut.valid?
             session[:slug] = params[:haircut][:customer_slug]

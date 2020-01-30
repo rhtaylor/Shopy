@@ -66,7 +66,7 @@ class CustomersController < ApplicationController
         
         @customer = Customer.create(customer_params) 
         
-        binding.pry
+        
         session[:customer_slug] = @customer.slug
         if @customer.valid?
             
