@@ -4,9 +4,7 @@ class CustomersController < ApplicationController
     skip_before_action :require_login, only: [:login, :new, :login_user, :create, :fbook]
     
    
-    def find_by_slug 
-
-    end
+   
    
     def fbook
         @auth_name = auth['info']['name'] 

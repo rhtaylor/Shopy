@@ -6,19 +6,21 @@ class HaircutsController < ApplicationController
  
 
   def filter 
-     
-        if  params.keys.include?("slug") && !(params[:customer].empty?) 
+            
+        if  params.keys.include?("id") && !(params[:customer].empty?)  
+            
             @one = Haircut.mycuts(current_user)  
-            @two = Haircut.where(customer_slug: params[:customer])
+            @two = Haircut.where(customer_id: params[:customer])
             @selected = @one.to_a + @two 
 
-        elsif params.keys.include?("slug") && params[:customer].empty?
-            @selected = Haircut.mycuts(current_user)  
+        elsif params.keys.include?("id") && params[:customer].empty?
             
-        elsif 
-            @id = params[:customer] 
-            @customer = Customer.find(@id)
-            @selected = Haircut.mycuts(@customer)
+            @selected = Haircut.mycuts(current_user)
+            
+        elsif   
+            
+           @selected = Haircut.where(customer_id: params[:customer])
+           
         end
      render :index
   end 

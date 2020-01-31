@@ -19,5 +19,7 @@ class Haircut < ApplicationRecord
         self.where(customer_id: val.id)
     end
     
-
+    def self.last 
+        self.order(:name, :ASC) 
+    end 
 end
