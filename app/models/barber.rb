@@ -14,7 +14,8 @@ class Barber < ApplicationRecord
   private 
 
   def set_slug  
-    self.slug = self.name.downcase.split(" ").join("-")
+    self.slug = self.name.downcase.split(" ").join("-") 
+    self.save!
   end
 
 end
