@@ -27,10 +27,9 @@ class Customer < ApplicationRecord
     private 
 
      def set_slug
-    loop do
+    
       self.slug = SecureRandom.uuid
-      break unless Customer.where(slug: slug).exists?
-    end
-  end 
+      
+     end 
 
 end

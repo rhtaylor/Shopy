@@ -13,8 +13,10 @@ class BarbersController < ApplicationController
         session[:customer_id] = session[:id]
         @barbers = Barber.all
     end 
-    def show  
-        barber_id = params[:id]  
-        @barber = Barber.find(barber_id)
+    def show   
+        
+        barber_slug = params[:slug]  
+        binding.pry
+        @barber = Barber.find_by(slug: barber_slug)
     end
 end
