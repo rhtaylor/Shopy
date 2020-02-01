@@ -11,9 +11,18 @@
 <% end %>
 </ul> 
 
-<p><%= link_to 'schedule a haircut', new_customer_haircut_path(@customer) %></p>
-
-<li><%= @customer.barbers.count %> Barbers cut your hair.<li/> 
+<% if @customer.haircuts.count == 0 %>
+    <h1><%= @customer.name %> you have nothing scheduled! </h1><%= link_to 'go get a cut!', new_customer_haircut_path(@customer) %> 
+<% else %>
+<ul>
+<% @customer.haircuts.each do |haircut| %> 
+    <li><%= haircut.date.to_time.strftime("Haircut on %A, %b %e at %l %M %p") %></li>
+<% end %> 
+</ul>
+<% end %>
+    <p><%= link_to 'schedule a haircut', new_customer_haircut_path(@customer) %></p>
+<% barber_count = @customer.barbers.uniq.count  %>
+<li><%= barber_count %> Barbers cut your hair.<li/> 
 <ol>
 <%  @customer.barbers.all.uniq.each do |x| %>
 
