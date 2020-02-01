@@ -1,5 +1,5 @@
 
-<%=form_for(haircut) do |f| %> 
+<%= form_for(haircut, url: '/customers/customer_slug/haircuts/new' ) do |f| %> 
 
 <%= f.label :style  %>
 <%= f.text_field :style %>

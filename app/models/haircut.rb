@@ -21,5 +21,9 @@ class Haircut < ApplicationRecord
     
     def self.last 
         self.order(:name, :ASC) 
-    end 
+    end  
+    def customer_name 
+       @customer = Customer.find_by(id: self.customer_id) 
+       @customer.name
+    end
 end

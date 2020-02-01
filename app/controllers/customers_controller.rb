@@ -53,7 +53,7 @@ class CustomersController < ApplicationController
             @switch = true
         else
             @switch = false 
-            @customer.nil? ? session[:errors] = "Username not found." : session[:errors] = 'Password incorrect.' 
+            @customer.nil? ? session[:errors] = "Email not found." : session[:errors] = 'Password incorrect.' 
             session[:page] = 'login'
         end  
    

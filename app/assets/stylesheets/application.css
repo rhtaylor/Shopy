@@ -44,4 +44,12 @@
 .nav{
     box-shadow: gold; 
     background-color: rgb(189, 245, 255);
+} 
+.shop{ 
+    background-color: rgb(240, 219, 193);
+} 
+.fields_with_errors{
+    background-color: rgb(255, 74, 110);
+    border: crimson; 
+    border-style: dotted;
 }

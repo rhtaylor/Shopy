@@ -65,8 +65,9 @@ class HaircutsController < ApplicationController
         customer_id = current_user.id
         @haircut = Haircut.create(style: style, date: date_ready , barber_id: barber.id, customer_id: customer_id) 
         if @haircut.valid?
-            session[:slug] = params[:haircut][:customer_slug]
-            redirect_to haircut_path(@haircut) 
+            session[:slug] = params[:haircut][:customer_slug] 
+            
+            redirect_to  customer_haircut_path(@customer, @haircut) 
             
         else 
             binding.pry 
