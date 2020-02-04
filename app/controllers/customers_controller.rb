@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController  
     helper_method :current_user, :logged_in? 
     before_action :require_login
-    skip_before_action :require_login, only: [:login, :new, :login_user, :fbook]
+    skip_before_action :require_login, only: [:login, :new, :login_user, :fbook, :create]
     
    
    
@@ -62,7 +62,8 @@ class CustomersController < ApplicationController
     def create  
         
         @customer = Customer.create(customer_params) 
-        session[:customer_slug] = @customer.slug
+        session[:customer_slug] = @customer.slug 
+        
         if @customer.valid?
             redirect_to customer_path(@customer) 
         else 

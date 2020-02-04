@@ -12,4 +12,7 @@
 <% end %>
 </ol> 
 </div> 
-<%= render partial: 'partial/cut', locals: {haircut: current_user.haircuts.new } %> 
+<h3>Schedule a Haircut</h3>
+<%= render partial: 'partial/cut', locals: {haircut: current_user.haircuts.new } %>  
+<h3>Schedule a trim, contour, shave, dye</h3>
+<%= render partial: 'partial/app', locals: {app: @appointment} %>

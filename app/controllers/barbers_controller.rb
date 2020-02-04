@@ -16,7 +16,7 @@ class BarbersController < ApplicationController
     def show   
         
         barber_slug = params[:slug]  
-        
+        @appointment = Appointment.new
         @barber = Barber.find_by(slug: barber_slug)
     end
 end
