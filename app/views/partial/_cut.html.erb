@@ -10,16 +10,13 @@
 <%= datetime_select( 'datetime' ,:date, {:minute_step => 15} )  %>
 
 <br> 
-<%= f.label :barber %> 
+<div <%= 'class="fields_with_errors"' if flash[:error] %>>
+<%= flash[:error] if flash[:error] %>
+<%= f.label :barber %>
+</div>  
+  
+<%= f.select :barber, options_for_select(Barber.all.map{ |x| x.name }) %>
 
-<%= f.text_field :barber, list: "categories_autocomplete"  %>
-  <datalist id="categories_autocomplete"> 
-    
-    <% Barber.all.each do |barber| %>
-      <option value="<%= barber.name %>" name="<%= barber.id %>">
-    <% end %> 
-    
-  </datalist> 
   <br>
   <%= f.label :customer %> 
   <% if haircut.customer_id.blank? %>

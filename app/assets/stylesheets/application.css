@@ -51,5 +51,6 @@
 .fields_with_errors{
     background-color: rgb(255, 74, 110);
     border: crimson; 
-    border-style: dotted;
+    border-style: dotted; 
+    color: red;
 }

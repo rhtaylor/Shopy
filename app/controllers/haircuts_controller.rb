@@ -58,7 +58,8 @@ class HaircutsController < ApplicationController
         date = dat += " "
         time = date_time[3, 4].join(":") 
         date_ready = date += time 
-        barber = Barber.find_by(name: params[:haircut][:barber]) 
+        barber = Barber.find_by(name: params[:haircut][:barber])  
+        
         style = params[:haircut][:style]
         slug = session[:customer_slug]
         @customer = Customer.find_by(slug: slug) 
@@ -70,8 +71,9 @@ class HaircutsController < ApplicationController
             redirect_to  customer_haircut_path(@customer, @haircut) 
             
         else 
-            binding.pry 
-            #add error handling here
+            
+            flash[:error] = "Must select a barber" 
+            redirect_to new_haircut_path
         end
 
     end 

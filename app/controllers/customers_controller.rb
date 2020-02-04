@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController  
     helper_method :current_user, :logged_in? 
     before_action :require_login
-    skip_before_action :require_login, only: [:login, :new, :login_user, :create, :fbook]
+    skip_before_action :require_login, only: [:login, :new, :login_user, :fbook]
     
    
    
@@ -29,14 +29,13 @@ class CustomersController < ApplicationController
         end
         redirect_to @in_db ? customer_path(@customer) : login_path
     end
+
     def login 
-        
-        @customer = Customer.new
+         @customer = Customer.new
     end 
-    def new  
+    def new   
         session[:page] = 'new'
         @customer = Customer.new
-        
     end 
     def login_user
          
@@ -63,16 +62,10 @@ class CustomersController < ApplicationController
     def create  
         
         @customer = Customer.create(customer_params) 
-        
-        
         session[:customer_slug] = @customer.slug
         if @customer.valid?
-            
-            
             redirect_to customer_path(@customer) 
         else 
-            
-
             flash[:error] = 'one or more problmes' 
             flash[:full_errors] = @customer.errors.details 
             redirect_to action: :new
@@ -94,9 +87,6 @@ class CustomersController < ApplicationController
         session.clear 
         redirect_to root_path 
     end 
-
-    
- 
     def destroy 
         binding.pry
     end
@@ -105,6 +95,7 @@ private
     def auth
         request.env['omniauth.auth']
     end
+    
     def customer_params 
         params.require('customer').permit('name', 'phone_number', 'email', 'password', 'password_confirmation')
     end
