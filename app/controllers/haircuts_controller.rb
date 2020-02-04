@@ -57,9 +57,10 @@ class HaircutsController < ApplicationController
         dat = date_time[0..2].join("-") 
         date = dat += " "
         time = date_time[3, 4].join(":") 
-        date_ready = date += time 
-        barber = Barber.find_by(name: params[:haircut][:barber])  
-        
+        date_ready = date += time  
+        barber_name = params[:haircut][:barber].split("-").join(" ")
+        barber = Barber.find_by(name: barber_name)  
+         # refactor database enteries to be all downcase
         style = params[:haircut][:style]
         slug = session[:customer_slug]
         @customer = Customer.find_by(slug: slug) 

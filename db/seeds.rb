@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 BarberShop.create(name: "So Sharp Barber Shop") 
-Barber.create(name: 'Master Barber', email: 'fake@gmail.com', barber_shop_id: 1) 
-Barber.create(name: 'Salon GuyfoReal', email: 'fufu@hair.commm', barber_shop_id: 1) 
-Barber.create(name: 'Rick Legit', email: 'yo@gmail.com', barber_shop_id: 1) 
+Barber.create(name: 'master barber', email: 'fake@gmail.com', barber_shop_id: 1) 
+Barber.create(name: 'salon guyforeal', email: 'fufu@hair.commm', barber_shop_id: 1) 
+Barber.create(name: 'rick legit', email: 'yo@gmail.com', barber_shop_id: 1) 
 Customer.create(name: "Morty", email: "notfake@gmail.com", phone_number: 3333333333, password: "1234", password_confirmation: "1234") 
 Customer.create(name: "Long Hair", email: "noreallyreal@gmail.com", phone_number: 444444444, password: "4321", password_confirmation: "4321")

@@ -15,8 +15,12 @@
 <%= f.label :barber %>
 </div>  
   
-<%= f.select :barber, options_for_select(Barber.all.map{ |x| x.name }) %>
-
+ <% if params.keys.include?("slug") %> 
+ <% current_barber = params["slug"] %>
+ <%= f.select :barber, current_barber => current_barber  %>
+ <% else %>
+<%= f.select :barber, options_for_select(Barber.all.map{ |x| x.name })%>
+<% end %>
   <br>
   <%= f.label :customer %> 
   <% if haircut.customer_id.blank? %>
