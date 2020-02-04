@@ -1,8 +1,10 @@
 <%= form_for(app) do |f| %>
     
-<% barber_name = @barber.name %>
-<%= f.hidden_field  :barber_id  %>
-<%= f.hidden_field :customer_id, :customer_id => current_user.id, :selected => current_user.id %>
+ <% if params.keys.include?("slug") %> 
+ <% current_barber = params["slug"] %>
+ <%= f.select :barber, current_barber => current_barber  %> 
+ <% end %>
+<%= f.hidden_field :customer_id  %>
 <%= f.select :service, options_for_select(Appointment.all.map{ |x| x.service }) %> 
 <%= datetime_select( 'datetime' ,:date, {:minute_step => 15} )  %>
 <%= f.submit %>
