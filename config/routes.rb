@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   resources :appointments
   resources :customers, param: :slug do 
     resources :haircuts, only: [:new, :show ]
+  end  
+  resources :customers, param: :slug do 
+    resources :appointments, only: [:new, :show]  
   end
   resources :barbers, param: :slug
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
