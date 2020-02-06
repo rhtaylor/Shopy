@@ -4,5 +4,8 @@
 
 retry or <%= link_to 'Sign up', new_customer_path if session[:errors] %>
 </div> 
-<%end %>
+<%end %> 
+<br>
+<%= link_to "Register", new_customer_path %> | <%= link_to 'homepage', root_path %> | <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<br>
 <%= render 'partial/signin' %>
