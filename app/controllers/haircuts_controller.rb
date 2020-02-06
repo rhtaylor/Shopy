@@ -1,7 +1,7 @@
 require 'date' 
 require 'time'
 class HaircutsController < ApplicationController 
-     helper_method :current_user, :logged_in?
+     helper_method :current_user, :logged_in?, :pull_date, :pull_barber_id, :pull_customer_id, :process_data
 
  
 
@@ -49,23 +49,11 @@ class HaircutsController < ApplicationController
       
     end 
 
-    def create 
-    
+    def create   
         
-        date_time = params[:datetime].values 
+        process_data
+        @haircut = Haircut.create(safe_params)  
         
-        dat = date_time[0..2].join("-") 
-        date = dat += " "
-        time = date_time[3, 4].join(":") 
-        date_ready = date += time  
-        barber_name = params[:haircut][:barber].split("-").join(" ")
-        barber = Barber.find_by(name: barber_name)  
-         # refactor database enteries to be all downcase
-        style = params[:haircut][:style]
-        slug = session[:customer_slug]
-        @customer = Customer.find_by(slug: slug) 
-        customer_id = current_user.id
-        @haircut = Haircut.create(style: style, date: date_ready , barber_id: barber.id, customer_id: customer_id) 
         if @haircut.valid?
             session[:slug] = params[:haircut][:customer_slug] 
             
@@ -90,9 +78,7 @@ class HaircutsController < ApplicationController
     end
     private 
 
-    def safe_params(*args) 
-        date = params[:haircut][:date].split(' ').join('')
-        barber = Barber.find_by(name: params[:haircut][:barber]) 
-        params.require('haircut').permit(:style, :customer_id)
-    end
+    def safe_params(*args)  
+        params.require('haircut').permit(:date, :style, :customer_id, :barber_id )
+        end
 end
