@@ -50,7 +50,7 @@ class HaircutsController < ApplicationController
     end 
 
     def create     
-         
+        
         params["generic"] = {}
         params["haircut"].each_pair{ |x,y| params["generic"][x] = y } 
         
@@ -62,9 +62,8 @@ class HaircutsController < ApplicationController
             
             redirect_to  customer_haircut_path(@customer, @haircut) 
         else 
-            
-            flash[:error] = "Must select a barber" 
-            redirect_to new_haircut_path
+            @haircut.errors.messages
+             redirect_to new_haircut_path
         end
 
     end 

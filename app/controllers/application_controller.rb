@@ -31,10 +31,13 @@ class ApplicationController < ActionController::Base
         
     end
     def pull_barber_id 
-        barber_name = params[:haircut][:barber].split("-").join(" ")
+        barber_name = params[:generic][:barber].split("-").join(" ")
         @barber = Barber.find_by(name: barber_name)  
-        params["generic"]["barber"] = params["haircut"]["barber_id"]
-        params["generic"]["barber_id"] = @barber.id 
+        
+        params["generic"]["barber_id"] = @barber.id  
+        params["generic"]["barber"] = nil
+        
+
         
     end 
     def pull_customer_id 

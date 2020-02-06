@@ -8,18 +8,13 @@ class AppointmentsController < ApplicationController
     end 
 
     def create 
-        date_time = params[:datetime].values 
-        dat = date_time[0..2].join("-") 
-        date = dat += " "
-        time = date_time[3, 4].join(":") 
-        date_ready = date += time   
-        barber_name = params[:appointment][:barber].split("-").join(" ") 
-        barber = Barber.find_by(name: barber_name) 
-        service = params[:appointment][:service] 
+        
+        params["generic"] = {}
+        params["appointment"].each_pair{ |x,y| params["generic"][x] = y } 
+        process_data
+       
         slug = session[:customer_slug] 
-        @customer = Customer.find_by(slug: slug) 
-        customer_id = current_user.id
-        @appointment = Appointment.create(service: service, date: date_ready , barber_id: barber.id, customer_id: customer_id) 
+        @appointment = Appointment.create(safe_params) 
         if @appointment.valid? 
             session[:slug] = params[:appointment][:customer_slug] 
             redirect_to  customer_appointment_path(@customer, @appointment)
@@ -27,7 +22,7 @@ class AppointmentsController < ApplicationController
 
     
     def show 
-        
+        @collection = Appointment.all.map{ |x| x.service }
         @customer = current_user 
         session[:customer_id] = @customer.id 
         session[:page] = 'appointment'
@@ -36,6 +31,12 @@ class AppointmentsController < ApplicationController
         
     end
     end    
+
+    private 
+
+def safe_params 
+ params.require('generic').permit!
+end
 
 
 end

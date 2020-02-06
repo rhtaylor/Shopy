@@ -18,6 +18,7 @@ class BarbersController < ApplicationController
         barber_slug = params[:slug]  
         @customer = current_user 
         @appointment = @customer.appointments.build
-        @barber = Barber.find_by(slug: barber_slug)
+        @barber = Barber.find_by(slug: barber_slug) 
+        @collection = Appointment.all.map{ |x| x.service }
     end
 end

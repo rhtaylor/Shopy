@@ -10,6 +10,12 @@
 <%= datetime_select( 'datetime' ,:date, {:minute_step => 15} )  %>
 
 <br> 
+<div <%= 'class="fields_with_errors"' if !(@haircut.nil?) %>> 
+<% @haircut.try(:errors).try(:messages).try(:each) do |k,v| %>
+  <%= k %> 
+  <%= v %> 
+  <%end%> 
+  </div>
 <div <%= 'class="fields_with_errors"' if flash[:error] %>>
 <%= flash[:error] if flash[:error] %>
 <%= f.label :barber %>
@@ -22,7 +28,7 @@
 <%= f.select :barber, options_for_select(Barber.all.map{ |x| x.name })%>
 <% end %>
   <br>
-  <%= f.label :customer %> 
+  
   <% if haircut.customer_id.blank? %>
   <%= f.text_field :customer_id %> 
   <% else %>

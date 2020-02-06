@@ -4,8 +4,9 @@
  <% current_barber = params["slug"] %>
  <%= f.select :barber, current_barber => current_barber  %> 
  <% end %>
-<%= f.hidden_field :customer_id  %>
-<%= f.select :service, options_for_select(Appointment.all.map{ |x| x.service }) %> 
+<%= f.hidden_field :customer_id  %> 
+
+<%= f.select :service, options_for_select(@collection.uniq) %> 
 <%= datetime_select( 'datetime' ,:date, {:minute_step => 15} )  %>
 <%= f.submit %>
 <% end %>
