@@ -16,8 +16,9 @@
 <% else %>
 <ul>
 <% @customer.haircuts.each do |haircut| %> 
-    <li><%= haircut.date.to_time.strftime("Haircut on %A, %b %e at %l %M %p") %></li>
-<% end %> 
+    <li><%= haircut.date.to_time.strftime("Haircut on %A, %b %e at %l %M %p") %></li> 
+    <li><%= link_to "delete", haircut_path(haircut), method: 'delete' %></li> 
+   <% end %> 
 </ul>
 <% end %>
     <p><%= link_to 'schedule a haircut', new_customer_haircut_path(@customer) %></p>

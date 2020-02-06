@@ -21,7 +21,8 @@ class ApplicationController < ActionController::Base
         current_user != nil || current_user.slug == session[:customer_slug] || current_user.slug == session[:slug]
     end 
 
-    def pull_date  
+    def pull_date   
+        
         date_time = params[:datetime].values 
         dat = date_time[0..2].join("-") 
         date = dat += " "

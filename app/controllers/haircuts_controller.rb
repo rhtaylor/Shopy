@@ -78,8 +78,16 @@ class HaircutsController < ApplicationController
         @haircut = Haircut.find(params[:id]) 
         @barber = Barber.find(@haircut.barber_id) 
         
+    end 
+
+
+    def destroy 
+        @haircut = Haircut.find(params[:id]) 
+        @haircut.destroy
+        redirect_to customer_path(current_user)
     end
     private 
+  
 
     def safe_params
         params.require('generic').permit!

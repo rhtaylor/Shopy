@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :haircuts
   resources :appointments
   resources :customers, param: :slug do 
-    resources :haircuts, only: [:new, :show ]
+    resources :haircuts, only: [:new, :show, :destroy ]
   end  
   resources :customers, param: :slug do 
     resources :appointments, only: [:new, :show]  
