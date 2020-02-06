@@ -9,18 +9,7 @@
 
 <%= datetime_select( 'datetime' ,:date, {:minute_step => 15} )  %>
 
-<br> 
-<div <%= 'class="fields_with_errors"' if !(@haircut.nil?) %>> 
-<% @haircut.try(:errors).try(:messages).try(:each) do |k,v| %>
-  <%= k %> 
-  <%= v %> 
-  <%end%> 
-  </div>
-<div <%= 'class="fields_with_errors"' if flash[:error] %>>
-<%= flash[:error] if flash[:error] %>
-<%= f.label :barber %>
-</div>  
-  
+
  <% if params.keys.include?("slug") %> 
  <% current_barber = params["slug"] %>
  <%= f.select :barber, current_barber => current_barber  %>

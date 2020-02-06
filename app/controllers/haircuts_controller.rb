@@ -61,9 +61,11 @@ class HaircutsController < ApplicationController
             session[:slug] = params[:haircut][:customer_slug] 
             
             redirect_to  customer_haircut_path(@customer, @haircut) 
-        else 
-            @haircut.errors.messages
-             redirect_to new_haircut_path
+        else   
+            @alert = @haircut.errors
+            flash["message"] = "One or more problems"
+            flash[:error] = @alert
+             redirect_to action: :new
         end
 
     end 

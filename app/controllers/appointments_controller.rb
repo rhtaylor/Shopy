@@ -13,7 +13,8 @@ class AppointmentsController < ApplicationController
         params["appointment"].each_pair{ |x,y| params["generic"][x] = y } 
         process_data
        
-        slug = session[:customer_slug] 
+        slug = session[:customer_slug]  
+        @customer = current_user
         @appointment = Appointment.create(safe_params) 
         if @appointment.valid? 
             session[:slug] = params[:appointment][:customer_slug] 

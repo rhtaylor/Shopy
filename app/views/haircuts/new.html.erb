@@ -1,6 +1,10 @@
+
 <% if logged_in? %>  
-<% if flash[:error] %> 
-<h1 class="fields_with_errors"><%= flash[:error] %></h1>
+<% if flash[:error] %>
+<% flash[:error].each do |k,v| %> 
+<h1 class="fields_with_errors"><%= k %></h1> 
+<h1 class="fields_with_errors"><%= v.first %></h1>
+<% end %>
 <% end %>
 <% @customer %>
 <%= render partial: 'partial/cut', locals: { haircut: @customer.haircuts.build } %> 
