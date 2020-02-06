@@ -30,7 +30,8 @@ class CustomersController < ApplicationController
         redirect_to @in_db ? customer_path(@customer) : login_path
     end
 
-    def login 
+    def login  
+        session["page"] = "signin"
          @customer = Customer.new
     end 
     def new   
