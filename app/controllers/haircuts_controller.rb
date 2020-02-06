@@ -49,16 +49,18 @@ class HaircutsController < ApplicationController
       
     end 
 
-    def create   
+    def create     
+         
+        params["generic"] = {}
+        params["haircut"].each_pair{ |x,y| params["generic"][x] = y } 
         
         process_data
-        @haircut = Haircut.create(safe_params)  
+        @haircut = Haircut.create(safe_params)   
         
         if @haircut.valid?
             session[:slug] = params[:haircut][:customer_slug] 
             
             redirect_to  customer_haircut_path(@customer, @haircut) 
-            
         else 
             
             flash[:error] = "Must select a barber" 
@@ -78,7 +80,7 @@ class HaircutsController < ApplicationController
     end
     private 
 
-    def safe_params(*args)  
-        params.require('haircut').permit(:date, :style, :customer_id, :barber_id )
-        end
+    def safe_params
+        params.require('generic').permit!
+    end
 end

@@ -8,7 +8,6 @@ class AppointmentsController < ApplicationController
     end 
 
     def create 
-        
         date_time = params[:datetime].values 
         dat = date_time[0..2].join("-") 
         date = dat += " "
@@ -24,7 +23,7 @@ class AppointmentsController < ApplicationController
         if @appointment.valid? 
             session[:slug] = params[:appointment][:customer_slug] 
             redirect_to  customer_appointment_path(@customer, @appointment)
-    end   
+        end   
 
     
     def show 
